@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "Deck.h"
+#import "SetCard.h"
+
 
 @interface SetCardDeck : Deck
-
+//- (SetCard *) drawRandomCard;
 @end

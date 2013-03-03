@@ -12,30 +12,13 @@
 #import "SetCard.h"
 
 @interface SetGameViewController ()
-
-@property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) SetMatchingGame *game;
-@property (nonatomic) int flipCount;
-//@property (strong, nonatomic) SetCardDeck *deck;
+@property (strong, nonatomic) SetCardDeck *deck;
 
 @end
 
 @implementation SetGameViewController
-
-- (void) setCardButtons:(NSArray *)cardButtons
-{
-    
-    _cardButtons = cardButtons;
-    [self updateUI];
-    /*
-     for (UIButton *cardButton in cardButtons){
-     Card *card = [self.deck drawRandomCard];
-     [cardButton setTitle:card.contents forState:UIControlStateSelected];
-     }
-     */
-}
 
 - (SetMatchingGame *) game
 {
@@ -47,56 +30,44 @@
     return _game;
 }
 
-
+- (SetCardDeck  *) deck
+{
+    if (!_deck){
+        _deck = [[SetCardDeck alloc] init];
+        NSLog(@"initialized deck");
+    }
+    return _deck;
+}
 
 - (IBAction)flipCard:(UIButton *)sender
 {
-    [self.game  flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
-    self.flipCount++;
-    [self updateUI];
-    //NSLog(@"index of the button is %d", [self.cardButtons indexOfObject:sender]);
+   // [self.game  flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
+   // NSLog(@"index of the button is %d", [self.cardButtons indexOfObject:sender]);
+   // [self updateUI];
+    SetCard *card = [self.deck drawRandomCard];
+    
+    NSLog(@"%@",card.symbol);
+    NSLog(@"I am here");
+    NSLog(@"%@",[self AttributedCardTitle:card]);
+
+    sender.selected = !sender.isSelected;
     
 }
 
 
 - (void) updateUI
 {
-    NSLog(@"I am updating UI");
     for (UIButton *cardButton in self.cardButtons){
-        
-        
         SetCard *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
         
-        [cardButton setAttributedTitle:[self AttributedCardTitle:card]
-                    forState:UIControlStateSelected];
+        [cardButton  setAttributedTitle:[self AttributedCardTitle:card] forState:UIControlStateSelected];
+        [cardButton setTitle:[card contents] forState:UIControlStateSelected|UIControlStateDisabled];
         
-        [cardButton setAttributedTitle:[self AttributedCardTitle:card]
-                              forState:UIControlStateNormal];
-        
-        [cardButton setAttributedTitle:[self AttributedCardTitle:card]
-                    forState:UIControlStateSelected|UIControlStateDisabled];
-        
-        UIImage *img = [UIImage imageNamed:@"lightgrey.jpg"];
-        [cardButton setBackgroundImage:img
-                              forState:UIControlStateSelected];
-        
-    
-        cardButton.selected = card.isFaceUp;
-       // cardButton.enabled = !card.isUnplayable;
-        //cardButton.alpha = card.isUnplayable ? 0.3 : 1.0;
+        cardButton.selected = YES;
+        cardButton.enabled = YES;
+        cardButton.alpha = 1.0;
     }
-    //self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-
 }
-
-
-- (void)setFlipCount:(int)flipCount
-{
-    _flipCount = flipCount;
-    self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
-}
-
-
 
 
 - (NSMutableAttributedString *) AttributedCardTitle:(SetCard *) card
@@ -108,15 +79,11 @@
     NSMutableAttributedString *dispStr = [[NSMutableAttributedString alloc] initWithString:allSymbols];
     NSRange range = NSMakeRange(0, [dispStr length]);
     float a = 1;
-    NSMutableDictionary *stringAttributes = [NSMutableDictionary dictionary];
-    NSDictionary *colors = @{ @"green" : [UIColor greenColor],
-                                @"blue" : [UIColor blueColor],
-                                @"red" : [UIColor redColor] };
+    NSMutableDictionary *stringAttributes = [NSMutableDictionary dictionary];    
 
-    UIColor *uicolor = colors[card.color];
     if ([card.shading isEqualToString:@"solid"]) {
         a = 1.0;
-        [stringAttributes setObject: [uicolor colorWithAlphaComponent:a]
+        [stringAttributes setObject: [card.color colorWithAlphaComponent:a]
                              forKey: NSForegroundColorAttributeName];
         
         // Set a negative width so we get both stroke and fill to show
@@ -126,7 +93,7 @@
     }
     else if ([card.shading isEqualToString:@"striped"]){
         a = 0.3;
-        [stringAttributes setObject: [uicolor colorWithAlphaComponent:a]
+        [stringAttributes setObject: [card.color colorWithAlphaComponent:a]
                              forKey: NSForegroundColorAttributeName];
         
         // Set a negative width so we get both stroke and fill to show
@@ -135,7 +102,7 @@
     }
     else if ([card.shading isEqualToString:@"open"]){
         a = 1.0;
-        [stringAttributes setObject: [uicolor colorWithAlphaComponent:a]
+        [stringAttributes setObject: [card.color colorWithAlphaComponent:a]
                              forKey: NSForegroundColorAttributeName];
         // Set a negative width so we get both stroke and fill to show
         

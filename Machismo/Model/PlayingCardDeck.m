@@ -14,7 +14,7 @@
 
 - (id)init
 {
-    self = [super init];
+    self = [super init]; // you let superclass initializes itself.
     
     if (self) {
         for (NSString *suit in [PlayingCard validSuits]) {

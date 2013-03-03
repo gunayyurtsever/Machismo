@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Deck.h"
+#import "SetCardDeck.h"
+#import "SetCard.h"
 
 @interface SetMatchingGame : NSObject
 
@@ -16,7 +17,7 @@
                usingDeck:(Deck *) deck;
 
 - (void) flipCardAtIndex:(NSUInteger) index;
-- (Card *) cardAtIndex:(NSUInteger) index;
+- (SetCard *) cardAtIndex:(NSUInteger) index;
 
 @property (nonatomic, readonly) int score;
 

@@ -40,6 +40,7 @@
 
 - (Card *) cardAtIndex:(NSUInteger)index
 {
+    //NSLog(@"returned card at index %d is %@", index, [self.cards objectAtIndex:index]);
     return (index < [self.cards count]) ? self.cards[index] : nil;
 }
 
@@ -50,7 +51,7 @@
 
 - (void)flipCardAtIndex:(NSUInteger)index
 {
-    NSLog(@"I am here 1");
+    //NSLog(@"I am here 1");
     Card *card = [self cardAtIndex:index];
     
     if (card && !card.isUnplayable){

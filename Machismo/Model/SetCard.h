@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Gunay Yurtsever. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "Card.h"
 
 @interface SetCard : Card
@@ -16,5 +15,9 @@
 @property (strong, nonatomic) NSString *shading;
 @property (strong, nonatomic) NSString *color;
 
++ (NSArray *)validSymbols;
++ (NSArray *)validShadings;
++ (NSArray *)validColors;
++ (NSUInteger)maxNumber;
 
 @end

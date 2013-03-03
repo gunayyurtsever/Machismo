@@ -49,7 +49,7 @@
     }
 }
 
-// setter contents
+// getter contents
 - (NSString *)contents
 {
     NSArray *rankStrings = [PlayingCard rankStrings];
