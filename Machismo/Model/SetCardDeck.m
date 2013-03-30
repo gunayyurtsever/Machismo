@@ -33,7 +33,7 @@
         for (NSString *symbol in [SetCard validSymbols]) {
             for (NSUInteger number = 1; number <= [SetCard maxNumber]; number++) {
                 for (NSString* shading in [SetCard validShadings]) {
-                    for (UIColor* color in [SetCard validColors]) {
+                    for (NSString* color in [SetCard validColors]) {
                         SetCard *card = [[SetCard alloc] init];
                         card.number = number;
                         card.symbol = symbol;

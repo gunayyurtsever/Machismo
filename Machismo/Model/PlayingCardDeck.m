@@ -15,7 +15,7 @@
 - (id)init
 {
     self = [super init]; // you let superclass initializes itself.
-    
+    NSLog(@"Hello from init in PlayingCardDeck");
     if (self) {
         for (NSString *suit in [PlayingCard validSuits]) {
             for (NSUInteger rank = 1; rank <= [PlayingCard maxRank]; rank++) {

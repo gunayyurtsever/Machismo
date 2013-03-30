@@ -14,12 +14,37 @@
 @property (readwrite, nonatomic) NSDate* end;
 @property (readwrite, nonatomic) NSTimeInterval duration;
 
+
 @end
+
 
 @implementation CardGameResult
 
-#define ALL_RESULTS_KEY @"Matchismo_Regular_GameResults_All"
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _start = [NSDate date];
+        _end = _start;
+    }
+    return self;
+}
 
+- (NSTimeInterval)duration
+{
+    return [self.end timeIntervalSinceDate:self.start];
+}
+
+- (void)setScore:(int)score
+{
+    _score = score;
+    _end = [NSDate date];
+    [self synchronize];
+}
+
+
+#define ALL_RESULTS_KEY @"Matchismo_Regular_GameResults_All"
+   
 - (void)synchronize{
     NSMutableDictionary *mutableGameResultsFromUserDefaults = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:ALL_RESULTS_KEY] mutableCopy];
     if (!mutableGameResultsFromUserDefaults) mutableGameResultsFromUserDefaults = [[NSMutableDictionary alloc] init];
@@ -41,7 +66,7 @@
 #define END_KEY @"EndDate"
 #define SCORE_KEY @"Score"
 
-
+// convenience initializer
 - (id)initFromPropertyList:(id)plist {
     self = [self init];
     if (self) {
@@ -49,6 +74,7 @@
             _start = plist[START_KEY];
             _end = plist[END_KEY];
             _score = (int)plist[SCORE_KEY];
+            if (!_start || !_end) self = nil;
         }
     }
     return self;
@@ -59,23 +85,5 @@
     return @{START_KEY : self.start, END_KEY : self.end, SCORE_KEY : @(self.score) };
 }
 
-- (id)init{
-    self = [super init];
-    if (self) {
-        _start = [NSDate date];
-        _end = _start;
-    }
-    return self;
-}
-
-- (NSTimeInterval)duration{
-    return [self.end timeIntervalSinceDate:self.start];
-}
-
-- (void)setScore:(int)score{
-    _score = score;
-    _end = [NSDate date];
-    [self synchronize];
-}
     
 @end

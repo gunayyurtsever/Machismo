@@ -93,8 +93,8 @@
 		31A0A91D16D1601C003CC0FE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				31AF411F16C41CA800AAA561 /* CardGameViewController.m */,
 				31AF411E16C41CA800AAA561 /* CardGameViewController.h */,
+				31AF411F16C41CA800AAA561 /* CardGameViewController.m */,
 				31A0A91E16D16119003CC0FE /* SetGameViewController.h */,
 				31A0A91F16D16119003CC0FE /* SetGameViewController.m */,
 				31F3071616E3E3C7000F9FCF /* CardGameScoreViewController.h */,
