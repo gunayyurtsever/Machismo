@@ -70,8 +70,6 @@
 - (void)setGame:(CardMatchingGame *)game
 {
     _game = game;
-    if (!_game)
-        self.feedback.text = @"You started a new game";
 }
 
 
@@ -90,10 +88,8 @@
 
 - (void) updateUI
 {
-    //NSLog(@"I am updating UI");
     for (UIButton *cardButton in self.cardButtons){
         Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
-        //NSLog(@"cards are %@",card.contents);
         [cardButton setTitle:card.contents forState:UIControlStateSelected];
         [cardButton setTitle:card.contents forState:UIControlStateSelected|UIControlStateDisabled];
         cardButton.selected = card.isFaceUp;
@@ -101,7 +97,10 @@
         cardButton.alpha = card.isUnplayable ? 0.3 : 1.0;
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-
+    if ((self.game) && (self.game.matchingInfo))
+        self.feedback.text = self.game.matchingInfo;
+    else
+        self.feedback.text = @"You started a new game";
 }
 
 
@@ -114,8 +113,8 @@
 - (IBAction)flipCard:(UIButton *)sender {
     [self.game  flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     self.flipCount++;
-    [self updateUI];
     self.cardGameResult.score = self.game.score;
+    [self updateUI];
     //NSLog(@"index of the button is %d", [self.cardButtons indexOfObject:sender]);
 }
 

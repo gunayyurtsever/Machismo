@@ -21,4 +21,7 @@
 
 @property (readonly, nonatomic) int score;
 
+@property (readonly, nonatomic) NSString* matchingInfo;
+
+
 @end
