@@ -105,9 +105,18 @@
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     if ((self.game) && (self.game.matchingInfo))
+    {
+        [self.gameTypeSelector setEnabled:NO forSegmentAtIndex:0];
+        [self.gameTypeSelector setEnabled:NO forSegmentAtIndex:1];
         self.feedback.text = self.game.matchingInfo;
+    }
     else
+    {
+        [self.gameTypeSelector setEnabled:YES forSegmentAtIndex:0];
+        [self.gameTypeSelector setEnabled:YES forSegmentAtIndex:1];
+        [self.gameTypeSelector setSelectedSegmentIndex:0];
         self.feedback.text = @"You started a new game";
+    }
 }
 
 
