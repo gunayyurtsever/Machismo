@@ -18,9 +18,11 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutlet UIButton *dealButton;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *gameTypeSelector;
 @property (nonatomic) int flipCount;
 @property (strong, nonatomic) CardGameResult *cardGameResult;
 @property (weak, nonatomic) IBOutlet UILabel *feedback;
+@property (nonatomic) int gameType;
 
 @end
 
@@ -84,6 +86,11 @@
     self.cardGameResult = nil;
     self.flipCount = 0;
     [self updateUI];
+}
+
+- (IBAction)gameTypeValueChanged:(id)sender {
+    self.gameType = [sender selectedSegmentIndex] + 2;
+    NSLog(@"Game type changed to: %d",self.gameType);
 }
 
 - (void) updateUI

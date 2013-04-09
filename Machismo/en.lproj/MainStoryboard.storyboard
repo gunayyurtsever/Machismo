@@ -283,7 +283,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0aX-go-2rQ">
-                                <rect key="frame" x="124" y="316" width="73" height="44"/>
+                                <rect key="frame" x="11" y="311" width="73" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Deal">
@@ -304,6 +304,17 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="Za3-N3-HCu">
+                                <rect key="frame" x="146" y="311" width="161" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="2-set"/>
+                                    <segment title="3-set"/>
+                                </segments>
+                                <connections>
+                                    <action selector="gameTypeValueChanged:" destination="2" eventType="valueChanged" id="fNb-xZ-qgo"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -312,6 +323,7 @@
                         <outlet property="dealButton" destination="0aX-go-2rQ" id="O0h-41-CbK"/>
                         <outlet property="feedback" destination="LFQ-Nf-PYP" id="Odo-ik-QbR"/>
                         <outlet property="flipsLabel" destination="Dio-oK-Ger" id="yKz-Rn-pLX"/>
+                        <outlet property="gameTypeSelector" destination="Za3-N3-HCu" id="v0Q-17-ZfG"/>
                         <outlet property="scoreLabel" destination="R8T-ud-mFl" id="NPJ-Si-xUQ"/>
                         <outletCollection property="cardButtons" destination="yai-Si-EAf" id="p9z-Zb-gpc"/>
                         <outletCollection property="cardButtons" destination="Nz5-nd-jAd" id="Ivt-Ay-2mU"/>
@@ -922,9 +934,12 @@
             <relationships>
                 <relationship kind="action" name="deal:"/>
                 <relationship kind="action" name="flipCard:" candidateClass="UIButton"/>
+                <relationship kind="action" name="gameTypeSelected:"/>
+                <relationship kind="action" name="gameTypeValueChanged:"/>
                 <relationship kind="outlet" name="dealButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="feedback" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="flipsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="gameTypeSelector" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="scoreLabel" candidateClass="UILabel"/>
                 <relationship kind="outletCollection" name="cardButtons" candidateClass="UIButton"/>
             </relationships>
